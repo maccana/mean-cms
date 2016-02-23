@@ -1,0 +1,1 @@
+Example MEAN stack CMS.
