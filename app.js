@@ -1,6 +1,6 @@
 var express = require('express');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/angcms');
+mongoose.connect('mongodb://localhost/meancms');
 var db = mongoose.connecetion;
 
 var path = require('path');
