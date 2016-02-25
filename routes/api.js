@@ -1,13 +1,79 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var Page= require('../models/page.js');
-var adminUser= require('../models/admin-users.js');
+var bcrypt = require('bcrypt-nodejs');
+var Page = require('../models/page.js');
+var adminUser = require('../models/admin-users.js');
+
+// Middleware to check session status on selected routes
+function sessionCheck(request,response,next){
+
+    if(request.session.user) next();
+        else response.send(401,'authorization failed');
+}
 
 /* User Routes. */
 
 router.get('/', function(req, res) {
   res.send('Welcome to the API zone');
+});
+
+// CREATE user
+router.post('/add-user', function(request, response) {
+    var salt, hash, password;
+    password = request.body.password;
+    salt = bcrypt.genSaltSync(10);
+    hash = bcrypt.hashSync(password, salt);
+
+    console.log("username:", request.body.username);
+
+    var AdminUser = new adminUser({
+        username: request.body.username,
+        password: hash
+    });
+    AdminUser.save(function(err) {
+        if (!err) {
+            return response.send('Admin User successfully created');
+
+        } else {
+            return response.send(err);
+        }
+    });
+});
+
+// LOGIN User
+router.post('/login', function(request, response) {
+  var username = request.body.username;
+  var password = request.body.password;
+
+  adminUser.findOne({
+    username: username
+  }, function(err, data) {
+    if (err | data === null) {
+      return response.send(401, "User Doesn't exist");
+    } else {
+      var usr = data;
+
+      if (username == usr.username && bcrypt.compareSync(password, usr.password)) {
+
+        request.session.regenerate(function() {
+          request.session.user = username;
+          return response.send(username);
+
+        });
+      } else {
+        return response.send(401, "Bad Username or Password");
+      }
+    }
+  });
+});
+
+// LOGOUT User
+router.get('/logout', function(request, response) {
+    request.session.destroy(function() {
+        return response.send(401, 'User logged out');
+
+    });
 });
 
 // GET pages index
@@ -23,7 +89,7 @@ router.get('/pages', function(request, response) {
 });
 
 // POST new page
-router.post('/pages/add', function(request, response) {
+router.post('/pages/add', sessionCheck, function(request, response) {
     var page = new Page({
         title: request.body.title,
         url: request.body.url,
@@ -43,7 +109,7 @@ router.post('/pages/add', function(request, response) {
 });
 
 // GET page via id
-router.get('/pages/admin-details/:id', function(request, response) {
+router.get('/pages/admin-details/:id', sessionCheck, function(request, response) {
     var id = request.params.id;
     Page.findOne({
         _id: id
@@ -67,11 +133,16 @@ router.get('/pages/details/:url', function(request, response) {
 });
 
 // UPDATE page
-router.post('/pages/update', function(request, response) {
-    var id = request.body._id;
+router.post('/pages/:id/update', sessionCheck, function(request, response) {
+
+    // var id = request.body._id;
+
     // Hardcoded document id for testing only
     // var id = "56ce09443a8286f2078c1ece";
 
+    //Passing page id as param in URL
+    var id = request.params.id;
+    
     Page.update({
         _id: id
     }, {
@@ -87,7 +158,7 @@ router.post('/pages/update', function(request, response) {
 });
 
 // DELETE page
-router.get('/pages/delete/:id', function(request, response) {
+router.get('/pages/delete/:id', sessionCheck, function(request, response) {
     var id = request.params.id;
     Page.remove({
         _id: id
