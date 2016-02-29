@@ -1,6 +1,11 @@
+.DS_Store
+public/.DS_Store
+
 #################
 ## npm
 #################
 
 npm-debug.log
 node_modules/
+
+public/bower_components/
