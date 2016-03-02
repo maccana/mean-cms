@@ -12,12 +12,11 @@ var bodyParser = require('body-parser');
 // Required routes
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var views = require('./routes/views');
 var api = require('./routes/api');
 
 var app = express();
 
-// view engine setup
+// view path and engine setup
 app.set('views', path.join(__dirname, 'public/app/views'));
 app.set('view engine', 'jade');
 // uncomment after placing your favicon in /public
@@ -35,14 +34,8 @@ app.use (session());
 // Make sure that app.use('/api', api); is called before app.use('/', routes);.
 // This will ensure that the /api routes get higher priority than the others.
 app.use('/api', api);
-
 app.use('/', routes);
-// Route for loading individual Angular partials in apps main view
-// Find jade templates in public/app/views
-app.use('/views/:name', views);
 app.use('/users', users);
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
