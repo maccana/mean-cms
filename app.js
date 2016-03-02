@@ -9,30 +9,37 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+// Required routes
 var routes = require('./routes/index');
 var users = require('./routes/users');
-// api
+var views = require('./routes/views');
 var api = require('./routes/api');
 
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'public/app/views'));
 app.set('view engine', 'jade');
-
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+//app.use(cookieParser());
+app.use(cookieParser('secret'));
 app.use(express.static(path.join(__dirname, 'public')));
+
+var session = require('express-session');
+app.use (session());
 
 // Make sure that app.use('/api', api); is called before app.use('/', routes);.
 // This will ensure that the /api routes get higher priority than the others.
 app.use('/api', api);
 
 app.use('/', routes);
+// Route for loading individual Angular partials in apps main view
+// Find jade templates in public/app/views
+app.use('/views/:name', views);
 app.use('/users', users);
 
 
