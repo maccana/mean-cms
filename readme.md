@@ -1,1 +1,1 @@
-Project to build a basic CMS foundation using the MEAN stack.
+Project to build a basic CMS-style app using the MEAN stack.
