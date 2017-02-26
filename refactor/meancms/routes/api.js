@@ -72,7 +72,7 @@ router.post('/pages', sessionCheck, function(request, response) {
         }
     });
 });
-
+// CREATE new page
 // Should maybe be modified /pages/:id - modified from '/pages/add/:id'
 // Logic behind original URL is to share one form for adding a new pages
 // or editing an exisiting one. If the page is a new one, then the :id
