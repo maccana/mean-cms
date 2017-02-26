@@ -18,5 +18,8 @@ router.get('/views/:name', function (req, res) {
   res.render(path.join(__dirname, '../public/app/views/' + name));
 
 });
+router.get('*', function(request, response) {
+    response.sendfile('./public/index.html');
+});
 
 module.exports = router;

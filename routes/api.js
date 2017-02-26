@@ -88,6 +88,18 @@ router.get('/pages', function(request, response) {
     });
 });
 
+// GET a single page by id
+router.get('/pages/:id', function(request, response) {
+    var id = request.params.id;
+    Page.findOne({
+        _id: id
+    }, function(err, page) {
+        if (err)
+            return console.log(err);
+        return response.send(page);
+    });
+});
+
 // POST new page
 router.post('/pages/add', sessionCheck, function(request, response) {
     var page = new Page({
@@ -142,7 +154,7 @@ router.post('/pages/:id/update', sessionCheck, function(request, response) {
 
     //Passing page id as param in URL
     var id = request.params.id;
-    
+
     Page.update({
         _id: id
     }, {
