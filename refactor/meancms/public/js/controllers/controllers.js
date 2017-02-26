@@ -12,8 +12,27 @@ controller('AdminPagesCtrl', ['$scope', '$log', 'pagesFactory',
       });
 
       $scope.deletePage = function(id) {
+        console.log('Deleting page with id: ', id);
         pagesFactory.deletePage(id);
       };
 
     }
-]);
+])
+.controller('AdminLoginCtrl', ['$scope', '$location', '$cookies', 'AuthService','$log',
+      function($scope, $location, $cookies, AuthService, $log) {
+        $scope.credentials = {
+          username: '',
+          password: ''
+        };
+        $scope.login = function(credentials) {
+          AuthService.login(credentials).then(
+            function(res, err) {
+              $cookies.loggedInUser = res.data;
+              $location.path('/admin/pages');
+            },
+            function(err) {
+              $log.log(err);
+            });
+          };
+      }
+  ])

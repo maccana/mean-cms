@@ -9,7 +9,7 @@ angular.module('myApp.services', [])
       getPages: function() {
         return $http.get('/api/pages');
       },
-
+      // Refactor if require separate save / edit
       savePage: function(pageData) {
         var id = pageData._id;
 
@@ -20,7 +20,7 @@ angular.module('myApp.services', [])
         }
       },
       deletePage: function(id) {
-        return $http.get('/api/pages/delete/' + id);
+        return $http.delete('/api/pages/' + id);
       },
       getAdminPageContent: function(id) {
         return $http.get('/api/pages/admin-details/' + id);
@@ -30,4 +30,14 @@ angular.module('myApp.services', [])
       },
     };
   }
-]);
+])
+.factory('AuthService', ['$http', function($http) {
+  return {
+    login: function(credentials) {
+      return $http.post('/api/login', credentials);
+    },
+    logout: function() {
+      return $http.get('/api/logout');
+    }
+  };
+}]);
