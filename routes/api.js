@@ -15,7 +15,7 @@ function sessionCheck(request,response,next){
 /* User Routes. */
 
 router.get('/', function(req, res) {
-  res.send('Welcome to the API zone');
+  res.send('Welcome to the API zone.');
 });
 
 // CREATE user
