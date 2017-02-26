@@ -10,3 +10,5 @@ node_modules/
 
 public/bower_components/
 public/node_modules/
+refactor/meancms/public/bower_components/bootstrap/
+refactor/meancms/public/bower_components/jquery/
