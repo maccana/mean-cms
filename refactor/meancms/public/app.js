@@ -8,7 +8,8 @@ angular.module('myApp', [
   'myApp.version',
   'myApp.services',
   'myApp.controllers',
-  'ngCookies'
+  'ngCookies',
+  'message.flash'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.html5Mode(true).hashPrefix('!');
