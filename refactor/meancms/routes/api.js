@@ -40,6 +40,17 @@ router.get('/pages/:id', function(request, response) {
     });
 });
 
+router.get('/pages/admin-details/:id', sessionCheck, function(request, response) {
+    var id = request.params.id;
+    Page.findOne({
+        _id: id
+    }, function(err, page) {
+        if (err)
+            return console.log(err);
+        return response.send(page);
+    });
+});
+
 router.get('/pages/details/:url', function(request, response) {
     var url = request.params.url;
     Page.findOne({
@@ -77,7 +88,7 @@ router.post('/pages', sessionCheck, function(request, response) {
 // Logic behind original URL is to share one form for adding a new pages
 // or editing an exisiting one. If the page is a new one, then the :id
 // of '0' was passed
-router.post('/pages/:id', sessionCheck, function(request, response) {
+router.post('/pages/admin-details/:id', sessionCheck, function(request, response) {
     // var id = request.body._id;
     var id = request.params.id; // For CRUD testing
 

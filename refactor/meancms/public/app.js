@@ -25,10 +25,10 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
       controller: 'AdminPagesCtrl'
   });
   // TODO
-  // $routeProvider.when('/admin/add-edit-page/:id', {
-  //     templateUrl: 'partials/admin/add-edit-page.html',
-  //     controller: 'AddEditPageCtrl'
-  // });
+  $routeProvider.when('/admin/add-edit-page/:id', {
+      templateUrl: 'partials/admin/add-edit-page.html',
+      controller: 'AddEditPageCtrl'
+  });
   $routeProvider.otherwise({
       redirectTo: '/'
   });
