@@ -18,8 +18,13 @@ controller('AdminPagesCtrl', ['$scope', '$log', 'pagesFactory',
 
     }
 ])
-.controller('AddEditPageCtrl', ['$scope', '$log', 'pagesFactory', '$routeParams', '$location', 'flashMessageService',
-  function($scope, $log, pagesFactory, $routeParams, $location, flashMessageService) {
+.controller('AddEditPageCtrl', ['$scope', '$log', 'pagesFactory', '$routeParams', '$location', 'flashMessageService', '$filter',
+  function($scope, $log, pagesFactory, $routeParams, $location, flashMessageService, $filter) {
+
+        $scope.updateURL=function() {
+          $scope.pageContent.url = $filter('formatURL')($scope.pageContent.title);
+        }
+
         $scope.pageContent = {};
         $scope.pageContent._id = $routeParams.id;
         $scope.heading = "Add a New Page";
