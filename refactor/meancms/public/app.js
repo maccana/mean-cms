@@ -9,6 +9,7 @@ angular.module('myApp', [
   'myApp.services',
   'myApp.controllers',
   'ngCookies',
+  'ui.tinymce',
   'message.flash',
   'myApp.filters'
 ]).

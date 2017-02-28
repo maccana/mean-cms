@@ -21,7 +21,7 @@ controller('AdminPagesCtrl', ['$scope', '$log', 'pagesFactory',
 .controller('AddEditPageCtrl', ['$scope', '$log', 'pagesFactory', '$routeParams', '$location', 'flashMessageService', '$filter',
   function($scope, $log, pagesFactory, $routeParams, $location, flashMessageService, $filter) {
 
-        $scope.updateURL=function() {
+        $scope.updateURL = function() {
           $scope.pageContent.url = $filter('formatURL')($scope.pageContent.title);
         }
 

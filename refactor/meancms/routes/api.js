@@ -64,7 +64,7 @@ router.get('/pages/details/:url', function(request, response) {
 
 // POST a new page -> /pages
 // {"title":"Blog", "url":"/blog", "content": "Blog Stuff", "menuIndex": 4}
-router.post('/pages', sessionCheck, function(request, response) {
+router.post('/pages/add', sessionCheck, function(request, response) {
   console.log('page add called...');
     var page = new Page({
         title: request.body.title,
