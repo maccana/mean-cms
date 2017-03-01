@@ -88,9 +88,10 @@ router.post('/pages/add', sessionCheck, function(request, response) {
 // Logic behind original URL is to share one form for adding a new pages
 // or editing an exisiting one. If the page is a new one, then the :id
 // of '0' was passed
-router.post('/pages/admin-details/:id', sessionCheck, function(request, response) {
-    // var id = request.body._id;
-    var id = request.params.id; // For CRUD testing
+router.post('/pages/update', sessionCheck, function(request, response) {
+  console.log('hittttt ');
+    var id = request.body._id;
+    // var id = request.params.id; // For CRUD testing
 
     Page.update({
         _id: id
