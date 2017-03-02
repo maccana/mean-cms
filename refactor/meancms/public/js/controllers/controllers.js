@@ -5,15 +5,20 @@ controller('AdminPagesCtrl', ['$scope', '$log', 'pagesFactory',
   function($scope, $log, pagesFactory) {
     pagesFactory.getPages().then(
       function(response) {
+        console.log(response.data);
         $scope.allPages = response.data;
       },
       function(err) {
         $log.error(err);
       });
-
-      $scope.deletePage = function(id) {
-        console.log('Deleting page with id: ', id);
-        pagesFactory.deletePage(id);
+      
+      $scope.deletePage = function(id, index) {
+        console.log('id passed ', id);
+        console.log('Deleting index: ', index);
+        pagesFactory.deletePage(id).then(function(item) {
+          console.log('DELETED: ', item );
+          $scope.allPages.splice(index, 1);
+        });
       };
 
     }
