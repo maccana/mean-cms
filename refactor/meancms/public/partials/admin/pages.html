@@ -16,9 +16,11 @@
     <td>{{page.menuIndex}}</td>
     <td>{{page.title}}</td>
     <td>{{page.url}}</td>
-    <td> <a ng-href="/admin/add-edit-page/{{page._id}}">Edit</a>
+    <td>
+      <a ng-href="/admin/add-edit-page/{{page._id}}">Edit</a>
     </td>
-    <td> <a ng-href="#" ng-click="deletePage(page._id)">Delete</a>
+    <td>
+      <a ng-href="#" ng-click="deletePage(page._id,allPages.indexOf(page))">Delete</a>
     </td>
   </tr>
 </table>
