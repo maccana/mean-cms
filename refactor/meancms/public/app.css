@@ -23,7 +23,16 @@
   content: "|";
   padding-right: 0.3em;
 }
-
+header {
+  padding: 29px 18px 30px;
+  border: 1px solid #e7e7e7;
+  border-radius: 5px;
+  margin-top: -3px;
+  margin-bottom: 35px;
+}
+header img {
+  max-width: 22%;
+}
 .edit-btn a {
   color: #fff;
 }
