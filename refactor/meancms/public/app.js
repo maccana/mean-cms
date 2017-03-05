@@ -7,6 +7,7 @@ angular.module('myApp', [
   'myApp.view2',
   'myApp.version',
   'myApp.services',
+  'myApp.directives',
   'myApp.controllers',
   'ngCookies',
   'ui.tinymce',
@@ -16,20 +17,25 @@ angular.module('myApp', [
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.html5Mode(true).hashPrefix('!');
 
-  // $routeProvider.otherwise({redirectTo: '/view1'});
-
   $routeProvider.when('/admin/login', {
       templateUrl: 'partials/admin/login.html',
       controller: 'AdminLoginCtrl'
+  });
+  $routeProvider.when('/admin', {
+      templateUrl: 'partials/admin/pages.html',
+      controller: 'AdminPagesCtrl'
   });
   $routeProvider.when('/admin/pages', {
       templateUrl: 'partials/admin/pages.html',
       controller: 'AdminPagesCtrl'
   });
-  // TODO
   $routeProvider.when('/admin/add-edit-page/:id', {
       templateUrl: 'partials/admin/add-edit-page.html',
       controller: 'AddEditPageCtrl'
+  });
+  $routeProvider.when('/:url', {
+    templateUrl: 'partials/page.html',
+    controller: 'PageCtrl'
   });
   $routeProvider.otherwise({
       redirectTo: '/'
