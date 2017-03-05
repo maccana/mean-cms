@@ -9,7 +9,6 @@ angular.module('myApp.filters', [])
         var url = input.replace(/[`~!@#$%^&*()_|\+-=?;:'",.<>{}\[\]\/]/gi, '');
         var url = url.replace(/\s+/g, '-');
         return url.toLowerCase();
-
       };
     }
   ]);
