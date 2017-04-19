@@ -1,0 +1,42 @@
+/* app css stylesheet */
+
+html {
+  overflow-y: scroll;
+}
+
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li + li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+header {
+  padding: 29px 18px 30px;
+  border: 1px solid #e7e7e7;
+  border-radius: 5px;
+  margin-top: -3px;
+  margin-bottom: 35px;
+}
+header img {
+  max-width: 22%;
+}
+.edit-btn a {
+  color: #fff;
+}
