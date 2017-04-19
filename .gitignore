@@ -10,4 +10,5 @@ node_modules/
 
 bower_components/
 
-refactor/meancms/public/img/
+refactor/public/img/
+refactor/local.txt
