@@ -2,8 +2,8 @@ A refactor of the MEAN CMS project. This is a work in progress that currently al
 
 NOTE: MongoDB must already be configured locally AND at least one user must exist in the database with a username and password to login.
 
-Path to login as Admin
-/admin/login
+Path to login as Admin:
+'localhost:3000/admin/login'
 
-View pages admin dash (Note: pages cannot be updated or deleted if not signed in)
-/admin/pages
+View pages admin dash (Note: pages cannot be updated or deleted if not signed in):
+'localhost:3000/admin/pages'
