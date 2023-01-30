@@ -7,13 +7,11 @@ var adminUser = require('../models/admin-users.js');
 
 // Middleware to check session status on selected routes
 function sessionCheck(request,response,next){
-
     if(request.session.user) next();
         else response.send(401,'authorization failed');
 }
 
 /* User Routes. */
-
 router.get('/', function(req, res) {
   res.send('Welcome to the API zone.');
 });
@@ -55,11 +53,9 @@ router.post('/login', function(request, response) {
       var usr = data;
 
       if (username == usr.username && bcrypt.compareSync(password, usr.password)) {
-
         request.session.regenerate(function() {
           request.session.user = username;
           return response.send(username);
-
         });
       } else {
         return response.send(401, "Bad Username or Password");
@@ -72,13 +68,11 @@ router.post('/login', function(request, response) {
 router.get('/logout', function(request, response) {
     request.session.destroy(function() {
         return response.send(401, 'User logged out');
-
     });
 });
 
 // GET pages index
 router.get('/pages', function(request, response) {
-
     return Page.find(function(err, pages) {
         if (!err) {
             return response.send(pages);
